@@ -3,10 +3,25 @@
   display: flex;
   align-items: center;
   padding: 16px;
+  user-select: none;
   background-color: var(--theme-background-color);
   box-shadow: 0 0 2px 2px var(--theme-shadow-color);
   border-radius: 4px;
   color: var(--theme-foreground-color);
+
+  @mixin button {
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+    transition: background-color 200ms, color 200ms;
+    background-color: transparent;
+    color: var(--theme-foreground-color);
+
+    &:hover, &:active {
+      background-color: var(--theme-foreground-color);
+      color: var(--theme-background-color);
+    }
+  }
 
   .form {
     width: 100%;
@@ -27,16 +42,7 @@
     }
 
     .submit {
-      border: none;
-      padding: 4px;
-      cursor: pointer;
-      transition: background-color 200ms;
-      transition: color 200ms;
-
-      &:hover {
-        background-color: var(--theme-foreground-color);
-        color: var(--theme-background-color);
-      }
+      @include button();
     }
   }
 
@@ -58,5 +64,27 @@
     flex: 1;
     text-align: right;
     font-size: 56px;
+  }
+
+  .controls {
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+    margin: 0 0 0 16px;
+    padding: 0;
+    overflow: hidden;
+    transition: max-width 200ms ease-in;
+    max-width: 0;
+
+    button {
+      font-size: 20px;
+      @include button;
+    }
+  }
+
+  &:hover , &:active  {
+    .controls {
+      max-width: 100px;
+    }
   }
 }

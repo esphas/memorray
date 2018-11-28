@@ -9,11 +9,18 @@
   .item {
     margin: 8px 0;
     overflow: hidden;
-    transition: max-height 200ms ease-in-out;
-    max-height: 200px;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+    transition-property: max-height, opacity, margin, padding;
+    max-height: 108px;
+    opacity: 1.0;
   }
 
-  .creating {
-    max-height: 0;
+  .closed {
+    max-height: 0px;
+    opacity: 0;
+    margin: 0;
+    padding-top: 0;
+    padding-bottom: 0;
   }
 }

@@ -8,6 +8,7 @@ import * as styles from './Memo.scss';
 export class Memo extends React.PureComponent<{
   data?: MemoData;
   createCallback?: (data: MemoData) => void;
+  removeCallback?: (key: string) => void;
   className?: string;
 }, {
   dateDiff: number;
@@ -20,6 +21,7 @@ export class Memo extends React.PureComponent<{
       dateDiff: this.dateDiff,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
   }
 
   public componentDidMount() {
@@ -64,6 +66,11 @@ export class Memo extends React.PureComponent<{
         </span>
         <span className={styles.note}>
           {this.props.data.note}
+        </span>
+        <span className={styles.controls}>
+          <button onClick={this.handleRemove}>
+            Remove
+          </button>
         </span>
       </React.Fragment>
     );
@@ -125,6 +132,10 @@ export class Memo extends React.PureComponent<{
       data.note,
     ));
     form.reset();
+  }
+
+  private handleRemove(event) {
+    this.props.removeCallback(this.props.data.key);
   }
 }
 
