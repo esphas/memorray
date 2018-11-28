@@ -7,7 +7,7 @@ import * as styles from './Memo.scss';
 
 export class Memo extends React.PureComponent<{
   data?: MemoData;
-  createCallback?: (event: Event) => void;
+  createCallback?: (data: MemoData) => void;
   className?: string;
 }, {
   dateDiff: number;
@@ -113,9 +113,9 @@ export class Memo extends React.PureComponent<{
     event.preventDefault();
     const formdata = new FormData(event.target);
     const data = {
-      date: new Date(formdata.get('date')),
+      date: new Date(formdata.get('date') as string),
       key: '',
-      note: formdata.get('note'),
+      note: formdata.get('note') as string,
     };
     data.key = `i${Date.now()}`;
     this.props.createCallback(new MemoData(
