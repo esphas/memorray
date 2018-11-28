@@ -4,15 +4,22 @@ import * as styles from './App.scss';
 import Header from './Components/Header';
 import MemoList from './Components/MemoList';
 
+enum Theme {
+  'default',
+}
+
 export class App extends React.Component<{
-  theme?: string;
+  theme?: Theme;
 }> {
+  public theme: Theme;
+
   constructor(props) {
     super(props);
     this.loadTheme(props.theme || 'default');
   }
 
-  public loadTheme(theme) {
+  public loadTheme(theme: Theme) {
+    this.theme = theme;
     const root = document.documentElement;
     const variables = [
       'desktop-color',
