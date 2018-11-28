@@ -1,6 +1,7 @@
 
 import Classnames from 'classnames';
 import * as React from 'react';
+import { setImmediate } from 'timers';
 import MemoData from '../Misc/Memo';
 import Memo from './Memo';
 import * as styles from './MemoList.scss';
@@ -19,15 +20,26 @@ export class MemoList extends React.Component<{
   }
 
   public render() {
-    function createMemo(memo: MemoData) {
+    const createMemo = (memo: MemoData) => {
+      let className = styles.item;
+      if (memo.creating) {
+        className = Classnames(className, styles.creating);
+        setImmediate(() => {
+          this.setState((state) => {
+            const items = state.items;
+            items.find((data) => data.key === memo.key).creating = false;
+            return { items };
+          });
+        });
+      }
       return (
         <Memo
-          className={styles.item}
+          className={className}
           key={memo.key}
           data={memo}
         />
       );
-    }
+    };
     return (
       <div className={Classnames(styles.main, this.props.className)}>
         <Memo
@@ -41,12 +53,15 @@ export class MemoList extends React.Component<{
 
   private getMemoItems() {
     const localStorage = window.localStorage;
+    let items;
     try {
-      return JSON.parse(localStorage.getItem('memos')) || [];
+      items = JSON.parse(localStorage.getItem('memos')) || [];
     } catch {
       localStorage.removeItem('memos');
-      return [];
+      items = [];
     }
+    items = items.map((data) => ({ ...data, creating: false }));
+    return items;
   }
 
   private setMemoItems(items) {
@@ -56,6 +71,7 @@ export class MemoList extends React.Component<{
 
   private handleCreateMemo(data) {
     this.setState((state) => {
+      data = { ...data, creating: true };
       const items = [data].concat(state.items);
       this.setMemoItems(items);
       return { items };

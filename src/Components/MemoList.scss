@@ -8,5 +8,12 @@
 
   .item {
     margin: 8px 0;
+    overflow: hidden;
+    transition: max-height 200ms ease-in-out;
+    max-height: 200px;
+  }
+
+  .creating {
+    max-height: 0;
   }
 }

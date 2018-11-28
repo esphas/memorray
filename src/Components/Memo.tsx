@@ -11,8 +11,9 @@ export class Memo extends React.PureComponent<{
   className?: string;
 }, {
   dateDiff: number;
-  intervalId?: NodeJS.Timeout;
 }> {
+  private intervalId?: NodeJS.Timeout;
+
   constructor(props) {
     super(props);
     this.state = {
@@ -23,14 +24,13 @@ export class Memo extends React.PureComponent<{
 
   public componentDidMount() {
     if (this.props.data) {
-      const intervalId = setInterval(this.timer.bind(this), 1000);
-      this.setState({ intervalId });
+      this.intervalId = setInterval(this.timer.bind(this), 1000);
     }
   }
 
   public componentWillUnmount() {
-    if (this.state.intervalId) {
-      clearInterval(this.state.intervalId);
+    if (this.intervalId) {
+      clearInterval(this.intervalId);
     }
   }
 
@@ -111,7 +111,8 @@ export class Memo extends React.PureComponent<{
 
   private handleSubmit(event) {
     event.preventDefault();
-    const formdata = new FormData(event.target);
+    const form = event.target;
+    const formdata = new FormData(form);
     const data = {
       date: new Date(formdata.get('date') as string),
       key: '',
@@ -123,7 +124,7 @@ export class Memo extends React.PureComponent<{
       data.date,
       data.note,
     ));
-    event.target.reset();
+    form.reset();
   }
 }
 
