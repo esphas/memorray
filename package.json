@@ -1,0 +1,30 @@
+{
+  "name": "memorray",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://github.com/esphas/memorray#readme",
+  "repository": "github:esphas/memorray",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.2.6",
+    "@types/react": "^16.7.7",
+    "@types/react-dom": "^16.0.10",
+    "autoprefixer": "^9.3.1",
+    "parcel-bundler": "^1.10.3",
+    "postcss-modules": "^1.4.1",
+    "sass": "^1.15.1",
+    "tslint": "^5.11.0",
+    "tslint-react": "^3.6.0",
+    "typed-css-modules": "^0.3.7",
+    "typescript": "^3.1.6"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "date-fns": "^1.29.0",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3"
+  }
+}

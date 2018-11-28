@@ -1,0 +1,11 @@
+
+# package manager
+node_modules/
+
+# build cache result
+.cache/
+dist/
+
+# temp
+temp/
+tmp/

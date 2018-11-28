@@ -1,0 +1,28 @@
+
+.main {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+
+  .brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .toolbox {
+    width: 0;
+    display: flex;
+
+    .toolbox_content {
+      transform: translateX(-100%);
+      display: flex;
+      padding: 8px;
+
+      a {
+        display: flex;
+      }
+    }
+  }
+}

@@ -1,0 +1,14 @@
+
+.main {
+  text-decoration: none;
+  font-size: 28px;
+  user-select: none;
+}
+
+.foreground {
+  color: var(--theme-foreground-color);
+}
+
+.background {
+  color: var(--theme-background-color);
+}
